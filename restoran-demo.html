@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ЯНТАРЬ — ресторан, бронирование столика</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#120e0d;
+    --surface:#1a1412;
+    --surface2:#221a17;
+    --line:#3a2c26;
+    --text:#f2e9df;
+    --muted:#a9998c;
+    --gold:#c9a24a;
+    --gold-dim:#8a6f30;
+    --wine:#8a2f34;
+    --wine-dim:#5e1f23;
+    --radius:16px;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{background:var(--bg);color:var(--text);font-family:'Manrope',sans-serif;overflow-x:hidden;-webkit-font-smoothing:antialiased;}
+  h1,h2,h3,.disp{font-family:'Playfair Display',serif;}
+  a{color:inherit;text-decoration:none;}
+  .wrap{max-width:1160px;margin:0 auto;padding:0 24px;}
+  .eyebrow{display:inline-flex;align-items:center;gap:10px;font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);font-weight:600;margin-bottom:18px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:var(--gold);}
+  .btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;padding:16px 32px;border-radius:4px;font-weight:600;font-size:14.5px;letter-spacing:.02em;cursor:pointer;border:1px solid transparent;transition:transform .25s ease, box-shadow .25s ease, background .25s ease, color .25s ease;font-family:'Manrope',sans-serif;}
+  .btn-primary{background:var(--gold);color:#1b1410;box-shadow:0 10px 30px -10px rgba(201,162,74,.5);}
+  .btn-primary:hover{transform:translateY(-2px);box-shadow:0 14px 34px -8px rgba(201,162,74,.65);}
+  .btn-ghost{border-color:var(--line);color:var(--text);background:rgba(255,255,255,.02);}
+  .btn-ghost:hover{border-color:var(--gold);color:var(--gold);}
+
+  header{position:fixed;top:0;left:0;right:0;z-index:100;backdrop-filter:blur(14px);background:rgba(18,14,13,.68);border-bottom:1px solid rgba(255,255,255,.06);}
+  nav{display:flex;align-items:center;justify-content:space-between;padding:20px 24px;max-width:1160px;margin:0 auto;}
+  .logo{font-family:'Playfair Display',serif;font-weight:700;font-size:24px;letter-spacing:.04em;}
+  .logo span{color:var(--gold);}
+  .nav-links{display:flex;gap:36px;font-size:14px;color:var(--muted);}
+  .nav-links a:hover{color:var(--text);}
+  .burger{display:none;flex-direction:column;gap:5px;cursor:pointer;background:none;border:none;}
+  .burger span{width:24px;height:2px;background:var(--text);}
+
+  /* HERO */
+  .hero{position:relative;min-height:100svh;display:flex;align-items:center;padding-top:90px;overflow:hidden;}
+  .hero-bg{position:absolute;inset:0;background:radial-gradient(900px 520px at 82% 20%, rgba(201,162,74,.10), transparent 60%), radial-gradient(800px 480px at 10% 85%, rgba(138,47,52,.16), transparent 60%), var(--bg);}
+  .glow{position:absolute;border-radius:50%;filter:blur(60px);pointer-events:none;background:radial-gradient(circle, rgba(201,162,74,.35), transparent 70%);width:420px;height:420px;top:10%;right:6%;animation:flicker 5s ease-in-out infinite;}
+  @keyframes flicker{0%,100%{opacity:.55;transform:scale(1);}45%{opacity:.85;transform:scale(1.06);}70%{opacity:.65;transform:scale(.98);}}
+  .hero-inner{position:relative;z-index:2;width:100%;}
+  .hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:44px;align-items:center;}
+  .hero h1{font-size:clamp(38px,6vw,68px);line-height:1.08;font-weight:700;font-style:italic;}
+  .hero h1 em{font-style:normal;color:var(--gold);}
+  .hero p.lead{margin-top:22px;font-size:17.5px;color:var(--muted);max-width:460px;line-height:1.7;}
+  .hero-cta{display:flex;gap:16px;margin-top:32px;flex-wrap:wrap;}
+  .hero-meta{display:flex;gap:34px;margin-top:46px;}
+  .hero-meta div b{font-family:'Playfair Display',serif;font-size:24px;display:block;color:var(--gold);}
+  .hero-meta div span{font-size:12.5px;color:var(--muted);}
+
+  .frame{position:relative;aspect-ratio:4/5;border-radius:var(--radius);overflow:hidden;border:1px solid var(--line);background:linear-gradient(160deg,#241a16,#150f0d 60%);}
+  .frame .flame{position:absolute;left:50%;top:38%;transform:translate(-50%,-50%);width:64px;height:100px;}
+  .frame .table-sketch{position:absolute;bottom:0;left:0;right:0;height:55%;background:linear-gradient(180deg, transparent, rgba(0,0,0,.5));}
+  .frame-tag{position:absolute;bottom:18px;left:18px;right:18px;display:flex;justify-content:space-between;font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);}
+
+  section{padding:120px 0;}
+  .section-head{max-width:620px;margin-bottom:60px;}
+  .section-head h2{font-size:clamp(30px,4vw,44px);line-height:1.1;font-weight:600;}
+  .section-head p{color:var(--muted);margin-top:16px;font-size:16px;line-height:1.7;}
+
+  .reveal{opacity:0;transform:translateY(26px);transition:opacity .7s ease, transform .7s ease;}
+  .reveal.in{opacity:1;transform:translateY(0);}
+
+  /* PHILOSOPHY */
+  .philosophy{background:var(--surface);border-top:1px solid var(--line);border-bottom:1px solid var(--line);}
+  .pcols{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;}
+  .pcard{padding:8px;}
+  .pcard .ic{width:38px;height:38px;color:var(--gold);margin-bottom:20px;}
+  .pcard h3{font-size:20px;font-weight:600;margin-bottom:12px;}
+  .pcard p{color:var(--muted);font-size:15px;line-height:1.7;}
+
+  /* MENU */
+  .dishes{display:grid;grid-template-columns:repeat(2,1fr);gap:2px;background:var(--line);border-radius:var(--radius);overflow:hidden;}
+  .dish{background:var(--surface2);padding:30px 28px;transition:background .3s ease;}
+  .dish:hover{background:#291f1a;}
+  .dish-top{display:flex;justify-content:space-between;align-items:baseline;gap:16px;margin-bottom:10px;}
+  .dish-top h3{font-size:19px;font-weight:600;}
+  .dish-top .price{font-family:'Playfair Display',serif;color:var(--gold);font-size:17px;white-space:nowrap;}
+  .dish p{color:var(--muted);font-size:14.5px;line-height:1.6;}
+
+  /* TABLE PICKER */
+  .picker-wrap{background:var(--surface);border-top:1px solid var(--line);border-bottom:1px solid var(--line);}
+  .picker{background:var(--surface2);border:1px solid var(--line);border-radius:var(--radius);padding:36px;display:flex;flex-wrap:wrap;gap:36px 48px;}
+  .zone{display:flex;flex-direction:column;gap:16px;min-width:120px;}
+  .zone-label{font-size:11px;letter-spacing:.15em;text-transform:uppercase;color:var(--muted);}
+  .zone-tables{display:flex;flex-wrap:wrap;gap:14px;}
+  .table-dot{
+    flex-shrink:0;width:56px;height:56px;border-radius:50%;background:var(--bg);border:1.5px solid var(--line);
+    display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-size:13px;color:var(--muted);
+    cursor:pointer;transition:all .25s ease;
+  }
+  .table-dot:hover{border-color:var(--gold-dim);color:var(--text);}
+  .table-dot.selected{background:var(--gold);border-color:var(--gold);color:#1b1410;box-shadow:0 0 0 6px rgba(201,162,74,.18);}
+  .picker-summary{width:100%;padding:16px 20px;border:1px dashed var(--line);border-radius:10px;font-size:14.5px;color:var(--muted);}
+  .picker-summary b{color:var(--gold);}
+
+  /* BOOKING */
+  .booking{}
+  .book-grid{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:start;}
+  form{display:flex;flex-direction:column;gap:16px;}
+  .field label{display:block;font-size:13px;color:var(--muted);margin-bottom:8px;letter-spacing:.03em;}
+  .field input,.field select{width:100%;padding:14px 16px;background:var(--surface2);border:1px solid var(--line);border-radius:8px;color:var(--text);font-family:'Manrope',sans-serif;font-size:15px;transition:border-color .2s ease;}
+  .field input:focus,.field select:focus{outline:none;border-color:var(--gold);}
+  .row2{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+  .row3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;}
+  .success{display:none;margin-top:14px;padding:14px 16px;border-radius:8px;background:rgba(201,162,74,.1);border:1px solid var(--gold-dim);color:var(--gold);font-size:14.5px;}
+  .success.show{display:block;animation:pop .35s ease;}
+  @keyframes pop{from{opacity:0;transform:scale(.96);}to{opacity:1;transform:scale(1);}}
+  .contact-list{display:flex;flex-direction:column;gap:22px;}
+  .contact-list .item b{display:block;font-family:'Playfair Display',serif;letter-spacing:.02em;margin-bottom:4px;font-size:17px;}
+  .contact-list .item span{color:var(--muted);font-size:14.5px;}
+
+  footer{padding:50px 0;border-top:1px solid var(--line);}
+  .foot-row{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;color:var(--muted);font-size:13.5px;}
+  .foot-links{display:flex;gap:22px;}
+
+  @media(max-width:880px){
+    .hero-grid{grid-template-columns:1fr;}
+    .frame{aspect-ratio:16/9;order:-1;}
+    .pcols,.dishes{grid-template-columns:1fr;}
+    .book-grid{grid-template-columns:1fr;gap:40px;}
+    .row2,.row3{grid-template-columns:1fr;}
+    .nav-links{position:fixed;top:72px;left:0;right:0;background:var(--bg);flex-direction:column;padding:24px;gap:20px;border-bottom:1px solid var(--line);transform:translateY(-140%);transition:transform .3s ease;}
+    .nav-links.open{transform:translateY(0);}
+    .burger{display:flex;}
+    .picker{padding:24px;gap:28px 32px;}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <nav>
+    <div class="logo">янтар<span>ь</span></div>
+    <div class="nav-links" id="navLinks">
+      <a href="#philosophy">О нас</a>
+      <a href="#menu">Меню</a>
+      <a href="#tables">Столики</a>
+      <a href="#booking">Бронь</a>
+    </div>
+    <a href="#booking" class="btn btn-primary" style="padding:11px 24px;font-size:13.5px;">Забронировать</a>
+    <button class="burger" id="burger" aria-label="Меню"><span></span><span></span><span></span></button>
+  </nav>
+</header>
+
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="glow"></div>
+  <div class="wrap hero-inner">
+    <div class="hero-grid">
+      <div>
+        <div class="eyebrow">ресторан авторской кухни</div>
+        <h1>Вечер, ради которого<br><em>стоит одеться</em></h1>
+        <p class="lead">Свечи, выдержанное вино и меню, которое меняется вместе с сезоном. Столик ждёт — осталось выбрать место в зале.</p>
+        <div class="hero-cta">
+          <a href="#booking" class="btn btn-primary">Забронировать столик</a>
+          <a href="#menu" class="btn btn-ghost">Посмотреть меню</a>
+        </div>
+        <div class="hero-meta">
+          <div><b>18:00–00:00</b><span>ежедневно</span></div>
+          <div><b>4.8</b><span>рейтинг гостей</span></div>
+          <div><b>32</b><span>столика в зале</span></div>
+        </div>
+      </div>
+      <div class="frame reveal">
+        <svg class="flame" viewBox="0 0 40 60" fill="none">
+          <path d="M20 4C14 16 8 22 8 34a12 12 0 0 0 24 0c0-9-4-14-6-20-1 6-4 9-4 9s-4-9-2-19Z" fill="#c9a24a" opacity=".85"/>
+        </svg>
+        <div class="table-sketch"></div>
+        <div class="frame-tag"><span>зал, вечер</span><span>свободно 6 мест</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="philosophy" id="philosophy">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="eyebrow">философия</div>
+      <h2>Три вещи, на которых всё держится</h2>
+    </div>
+    <div class="pcols">
+      <div class="pcard reveal">
+        <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M8 3v7a4 4 0 0 0 8 0V3M12 14v7M6 3v4M18 3v4"/></svg>
+        <h3>Кухня</h3>
+        <p>Сезонные продукты от локальных фермеров, минимум заморозки, авторская подача каждого блюда.</p>
+      </div>
+      <div class="pcard reveal">
+        <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 3h12l-2 9a4 4 0 0 1-8 0L6 3ZM12 15v6M8 21h8"/></svg>
+        <h3>Винная карта</h3>
+        <p>120 позиций от небольших виноделен, сомелье поможет подобрать пару к каждому блюду.</p>
+      </div>
+      <div class="pcard reveal">
+        <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2s6 6.5 6 11a6 6 0 1 1-12 0c0-4.5 6-11 6-11Z"/></svg>
+        <h3>Атмосфера</h3>
+        <p>Приглушённый свет, живой контрабас по пятницам и столики, за которыми не хочется спешить.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="menu">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="eyebrow">меню</div>
+      <h2>Несколько блюд, которыми гордимся</h2>
+      <p>Полное меню — в зале и в приложении для гостей, здесь — то, с чего стоит начать.</p>
+    </div>
+    <div class="dishes reveal">
+      <div class="dish"><div class="dish-top"><h3>Тартар из говядины</h3><span class="price">890 ₽</span></div><p>Мраморная говядина, каперсы, желток на 63°, гренки на бородинском.</p></div>
+      <div class="dish"><div class="dish-top"><h3>Гребешок на углях</h3><span class="price">1 350 ₽</span></div><p>Морской гребешок, соус beurre blanc, цветная капуста, икра трески.</p></div>
+      <div class="dish"><div class="dish-top"><h3>Утка конфи</h3><span class="price">1 190 ₽</span></div><p>Утиная ножка 12 часов томления, пюре из сельдерея, вишнёвый джус.</p></div>
+      <div class="dish"><div class="dish-top"><h3>Паста с трюфелем</h3><span class="price">980 ₽</span></div><p>Тальятелле ручной работы, чёрный трюфель, пармезан 24 месяца.</p></div>
+      <div class="dish"><div class="dish-top"><h3>Баранья корейка</h3><span class="price">1 650 ₽</span></div><p>Корейка на кости, соус демиглас, печёный батат, розмарин.</p></div>
+      <div class="dish"><div class="dish-top"><h3>Шоколадный фондан</h3><span class="price">560 ₽</span></div><p>Тёплый шоколад с жидкой сердцевиной, мороженое из мадагаскарской ванили.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="picker-wrap" id="tables">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="eyebrow">зал</div>
+      <h2>Выберите место в зале</h2>
+      <p>Нажмите на свободный столик — выбор автоматически подставится в форму брони.</p>
+    </div>
+    <div class="picker reveal">
+      <div class="zone">
+        <span class="zone-label">У окна</span>
+        <div class="zone-tables">
+          <div class="table-dot" data-zone="У окна" data-cap="2">2</div>
+          <div class="table-dot" data-zone="У окна" data-cap="4">4</div>
+        </div>
+      </div>
+      <div class="zone">
+        <span class="zone-label">Общий зал</span>
+        <div class="zone-tables">
+          <div class="table-dot" data-zone="Общий зал" data-cap="2">2</div>
+          <div class="table-dot" data-zone="Общий зал" data-cap="6">6</div>
+          <div class="table-dot" data-zone="Общий зал" data-cap="4">4</div>
+        </div>
+      </div>
+      <div class="zone">
+        <span class="zone-label">Терраса</span>
+        <div class="zone-tables">
+          <div class="table-dot" data-zone="Терраса" data-cap="2">2</div>
+          <div class="table-dot" data-zone="Терраса" data-cap="4">4</div>
+        </div>
+      </div>
+      <div class="zone">
+        <span class="zone-label">У бара</span>
+        <div class="zone-tables">
+          <div class="table-dot" data-zone="У бара" data-cap="2">2</div>
+          <div class="table-dot" data-zone="У бара" data-cap="2">2</div>
+        </div>
+      </div>
+      <div class="zone">
+        <span class="zone-label">Приватный кабинет</span>
+        <div class="zone-tables">
+          <div class="table-dot" data-zone="Приватный кабинет" data-cap="8">8</div>
+        </div>
+      </div>
+
+      <div class="picker-summary" id="pickerSummary">Столик пока не выбран — можно указать пожелание в форме брони.</div>
+    </div>
+  </div>
+</section>
+
+<section class="booking" id="booking">
+  <div class="wrap">
+    <div class="book-grid">
+      <div class="reveal">
+        <div class="eyebrow">бронирование</div>
+        <h2 style="font-size:clamp(28px,3.6vw,36px);margin-bottom:16px;">Забронировать столик</h2>
+        <p style="color:var(--muted);margin-bottom:28px;">Подтвердим бронь по телефону в течение 20 минут.</p>
+        <form id="bookForm">
+          <div class="row2">
+            <div class="field"><label>Имя</label><input type="text" required placeholder="Как к вам обращаться"></div>
+            <div class="field"><label>Телефон</label><input type="tel" required placeholder="+7 ___ ___ __ __"></div>
+          </div>
+          <div class="row3">
+            <div class="field"><label>Дата</label><input type="date" required></div>
+            <div class="field"><label>Время</label><input type="time" required></div>
+            <div class="field"><label>Гостей</label>
+              <select id="guestsSelect">
+                <option>2 гостя</option><option>3 гостя</option><option>4 гостя</option><option>5–8 гостей</option><option>Более 8</option>
+              </select>
+            </div>
+          </div>
+          <div class="field"><label>Выбранный столик</label><input type="text" id="tableField" placeholder="Не выбран — можно указать пожелание ниже" readonly></div>
+          <div class="field"><label>Комментарий (необязательно)</label><input type="text" placeholder="Особый повод, аллергии, пожелания"></div>
+          <button type="submit" class="btn btn-primary" style="margin-top:6px;">Отправить бронь</button>
+          <div class="success" id="successMsg">Бронь отправлена — мы свяжемся с вами для подтверждения.</div>
+        </form>
+      </div>
+      <div class="reveal contact-list">
+        <div class="item"><b>Телефон</b><span>+7 (900) 987-65-43</span></div>
+        <div class="item"><b>Адрес</b><span>г. Хельсинки, набережная, 12</span></div>
+        <div class="item"><b>Часы работы</b><span>Ежедневно, 18:00 – 00:00</span></div>
+        <div class="item"><b>Дресс-код</b><span>Smart casual, столики у окна — по предварительной брони</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap foot-row">
+    <div>© 2026 «Янтарь». Все права защищены.</div>
+    <div class="foot-links">
+      <a href="#menu">Меню</a>
+      <a href="#tables">Столики</a>
+      <a href="#booking">Бронь</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const burger = document.getElementById('burger');
+  const navLinks = document.getElementById('navLinks');
+  burger.addEventListener('click', ()=> navLinks.classList.toggle('open'));
+  navLinks.querySelectorAll('a').forEach(a=>a.addEventListener('click', ()=>navLinks.classList.remove('open')));
+
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
+  }, {threshold:.15});
+  document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+
+  const dots = document.querySelectorAll('.table-dot');
+  const summary = document.getElementById('pickerSummary');
+  const tableField = document.getElementById('tableField');
+  dots.forEach(dot=>{
+    dot.addEventListener('click', ()=>{
+      dots.forEach(d=>d.classList.remove('selected'));
+      dot.classList.add('selected');
+      const zone = dot.dataset.zone, cap = dot.dataset.cap;
+      summary.innerHTML = `Выбран столик: <b>${zone}, на ${cap} чел.</b>`;
+      tableField.value = `${zone}, столик на ${cap} чел.`;
+    });
+  });
+
+  document.getElementById('bookForm').addEventListener('submit', function(e){
+    e.preventDefault();
+    document.getElementById('successMsg').classList.add('show');
+    this.reset();
+    document.getElementById('tableField').value = '';
+  });
+</script>
+</body>
+</html>
