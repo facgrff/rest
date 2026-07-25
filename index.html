@@ -43,6 +43,8 @@
   .nav-links a:hover{color:var(--text);}
   .burger{display:none;flex-direction:column;gap:5px;cursor:pointer;background:none;border:none;}
   .burger span{width:24px;height:2px;background:var(--text);}
+  .lang-switch{border:1px solid var(--line);background:transparent;color:var(--text);border-radius:4px;padding:8px 14px;font-size:12px;letter-spacing:.05em;cursor:pointer;transition:border-color .2s ease,color .2s ease;}
+  .lang-switch:hover{border-color:var(--gold);color:var(--gold);}
 
   /* HERO */
   .hero{position:relative;min-height:100svh;display:flex;align-items:center;padding-top:90px;overflow:hidden;}
@@ -144,13 +146,16 @@
   <nav>
     <div class="logo">янтар<span>ь</span></div>
     <div class="nav-links" id="navLinks">
-      <a href="#philosophy">О нас</a>
-      <a href="#menu">Меню</a>
-      <a href="#tables">Столики</a>
-      <a href="#booking">Бронь</a>
+      <a href="#philosophy" data-i18n="nav_about">О нас</a>
+      <a href="#menu" data-i18n="nav_menu">Меню</a>
+      <a href="#tables" data-i18n="nav_tables">Столики</a>
+      <a href="#booking" data-i18n="nav_booking">Бронь</a>
     </div>
-    <a href="#booking" class="btn btn-primary" style="padding:11px 24px;font-size:13.5px;">Забронировать</a>
-    <button class="burger" id="burger" aria-label="Меню"><span></span><span></span><span></span></button>
+    <div style="display:flex;align-items:center;gap:10px;">
+      <a href="#booking" class="btn btn-primary" style="padding:11px 24px;font-size:13.5px;" data-i18n="nav_cta">Забронировать</a>
+      <button class="lang-switch" id="langSwitch">RU / EN</button>
+      <button class="burger" id="burger" aria-label="Меню"><span></span><span></span><span></span></button>
+    </div>
   </nav>
 </header>
 
@@ -160,17 +165,17 @@
   <div class="wrap hero-inner">
     <div class="hero-grid">
       <div>
-        <div class="eyebrow">ресторан авторской кухни</div>
-        <h1>Вечер, ради которого<br><em>стоит одеться</em></h1>
-        <p class="lead">Свечи, выдержанное вино и меню, которое меняется вместе с сезоном. Столик ждёт — осталось выбрать место в зале.</p>
+        <div class="eyebrow" data-i18n="hero_eyebrow">ресторан авторской кухни</div>
+        <h1 data-i18n-html="hero_title">Вечер, ради которого<br><em>стоит одеться</em></h1>
+        <p class="lead" data-i18n="hero_lead">Свечи, выдержанное вино и меню, которое меняется вместе с сезоном. Столик ждёт — осталось выбрать место в зале.</p>
         <div class="hero-cta">
-          <a href="#booking" class="btn btn-primary">Забронировать столик</a>
-          <a href="#menu" class="btn btn-ghost">Посмотреть меню</a>
+          <a href="#booking" class="btn btn-primary" data-i18n="hero_cta1">Забронировать столик</a>
+          <a href="#menu" class="btn btn-ghost" data-i18n="hero_cta2">Посмотреть меню</a>
         </div>
         <div class="hero-meta">
-          <div><b>18:00–00:00</b><span>ежедневно</span></div>
-          <div><b>4.8</b><span>рейтинг гостей</span></div>
-          <div><b>32</b><span>столика в зале</span></div>
+          <div><b>18:00–00:00</b><span data-i18n="meta1">ежедневно</span></div>
+          <div><b>4.8</b><span data-i18n="meta2">рейтинг гостей</span></div>
+          <div><b>32</b><span data-i18n="meta3">столика в зале</span></div>
         </div>
       </div>
       <div class="frame reveal">
@@ -178,7 +183,7 @@
           <path d="M20 4C14 16 8 22 8 34a12 12 0 0 0 24 0c0-9-4-14-6-20-1 6-4 9-4 9s-4-9-2-19Z" fill="#c9a24a" opacity=".85"/>
         </svg>
         <div class="table-sketch"></div>
-        <div class="frame-tag"><span>зал, вечер</span><span>свободно 6 мест</span></div>
+        <div class="frame-tag"><span data-i18n="frame_tag1">зал, вечер</span><span data-i18n="frame_tag2">свободно 6 мест</span></div>
       </div>
     </div>
   </div>
@@ -187,24 +192,24 @@
 <section class="philosophy" id="philosophy">
   <div class="wrap">
     <div class="section-head reveal">
-      <div class="eyebrow">философия</div>
-      <h2>Три вещи, на которых всё держится</h2>
+      <div class="eyebrow" data-i18n="phil_eyebrow">философия</div>
+      <h2 data-i18n="phil_title">Три вещи, на которых всё держится</h2>
     </div>
     <div class="pcols">
       <div class="pcard reveal">
         <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M8 3v7a4 4 0 0 0 8 0V3M12 14v7M6 3v4M18 3v4"/></svg>
-        <h3>Кухня</h3>
-        <p>Сезонные продукты от локальных фермеров, минимум заморозки, авторская подача каждого блюда.</p>
+        <h3 data-i18n="phil1_h">Кухня</h3>
+        <p data-i18n="phil1_p">Сезонные продукты от локальных фермеров, минимум заморозки, авторская подача каждого блюда.</p>
       </div>
       <div class="pcard reveal">
         <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 3h12l-2 9a4 4 0 0 1-8 0L6 3ZM12 15v6M8 21h8"/></svg>
-        <h3>Винная карта</h3>
-        <p>120 позиций от небольших виноделен, сомелье поможет подобрать пару к каждому блюду.</p>
+        <h3 data-i18n="phil2_h">Винная карта</h3>
+        <p data-i18n="phil2_p">120 позиций от небольших виноделен, сомелье поможет подобрать пару к каждому блюду.</p>
       </div>
       <div class="pcard reveal">
         <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2s6 6.5 6 11a6 6 0 1 1-12 0c0-4.5 6-11 6-11Z"/></svg>
-        <h3>Атмосфера</h3>
-        <p>Приглушённый свет, живой контрабас по пятницам и столики, за которыми не хочется спешить.</p>
+        <h3 data-i18n="phil3_h">Атмосфера</h3>
+        <p data-i18n="phil3_p">Приглушённый свет, живой контрабас по пятницам и столики, за которыми не хочется спешить.</p>
       </div>
     </div>
   </div>
@@ -213,17 +218,17 @@
 <section id="menu">
   <div class="wrap">
     <div class="section-head reveal">
-      <div class="eyebrow">меню</div>
-      <h2>Несколько блюд, которыми гордимся</h2>
-      <p>Полное меню — в зале и в приложении для гостей, здесь — то, с чего стоит начать.</p>
+      <div class="eyebrow" data-i18n="menu_eyebrow">меню</div>
+      <h2 data-i18n="menu_title">Несколько блюд, которыми гордимся</h2>
+      <p data-i18n="menu_lead">Полное меню — в зале и в приложении для гостей, здесь — то, с чего стоит начать.</p>
     </div>
     <div class="dishes reveal">
-      <div class="dish"><div class="dish-top"><h3>Тартар из говядины</h3><span class="price">890 ₽</span></div><p>Мраморная говядина, каперсы, желток на 63°, гренки на бородинском.</p></div>
-      <div class="dish"><div class="dish-top"><h3>Гребешок на углях</h3><span class="price">1 350 ₽</span></div><p>Морской гребешок, соус beurre blanc, цветная капуста, икра трески.</p></div>
-      <div class="dish"><div class="dish-top"><h3>Утка конфи</h3><span class="price">1 190 ₽</span></div><p>Утиная ножка 12 часов томления, пюре из сельдерея, вишнёвый джус.</p></div>
-      <div class="dish"><div class="dish-top"><h3>Паста с трюфелем</h3><span class="price">980 ₽</span></div><p>Тальятелле ручной работы, чёрный трюфель, пармезан 24 месяца.</p></div>
-      <div class="dish"><div class="dish-top"><h3>Баранья корейка</h3><span class="price">1 650 ₽</span></div><p>Корейка на кости, соус демиглас, печёный батат, розмарин.</p></div>
-      <div class="dish"><div class="dish-top"><h3>Шоколадный фондан</h3><span class="price">560 ₽</span></div><p>Тёплый шоколад с жидкой сердцевиной, мороженое из мадагаскарской ванили.</p></div>
+      <div class="dish"><div class="dish-top"><h3 data-i18n="d1_h">Тартар из говядины</h3><span class="price">890 ₽</span></div><p data-i18n="d1_p">Мраморная говядина, каперсы, желток на 63°, гренки на бородинском.</p></div>
+      <div class="dish"><div class="dish-top"><h3 data-i18n="d2_h">Гребешок на углях</h3><span class="price">1 350 ₽</span></div><p data-i18n="d2_p">Морской гребешок, соус beurre blanc, цветная капуста, икра трески.</p></div>
+      <div class="dish"><div class="dish-top"><h3 data-i18n="d3_h">Утка конфи</h3><span class="price">1 190 ₽</span></div><p data-i18n="d3_p">Утиная ножка 12 часов томления, пюре из сельдерея, вишнёвый джус.</p></div>
+      <div class="dish"><div class="dish-top"><h3 data-i18n="d4_h">Паста с трюфелем</h3><span class="price">980 ₽</span></div><p data-i18n="d4_p">Тальятелле ручной работы, чёрный трюфель, пармезан 24 месяца.</p></div>
+      <div class="dish"><div class="dish-top"><h3 data-i18n="d5_h">Баранья корейка</h3><span class="price">1 650 ₽</span></div><p data-i18n="d5_p">Корейка на кости, соус демиглас, печёный батат, розмарин.</p></div>
+      <div class="dish"><div class="dish-top"><h3 data-i18n="d6_h">Шоколадный фондан</h3><span class="price">560 ₽</span></div><p data-i18n="d6_p">Тёплый шоколад с жидкой сердцевиной, мороженое из мадагаскарской ванили.</p></div>
     </div>
   </div>
 </section>
@@ -231,48 +236,48 @@
 <section class="picker-wrap" id="tables">
   <div class="wrap">
     <div class="section-head reveal">
-      <div class="eyebrow">зал</div>
-      <h2>Выберите место в зале</h2>
-      <p>Нажмите на свободный столик — выбор автоматически подставится в форму брони.</p>
+      <div class="eyebrow" data-i18n="tables_eyebrow">зал</div>
+      <h2 data-i18n="tables_title">Выберите место в зале</h2>
+      <p data-i18n="tables_lead">Нажмите на свободный столик — выбор автоматически подставится в форму брони.</p>
     </div>
     <div class="picker reveal">
       <div class="zone">
-        <span class="zone-label">У окна</span>
+        <span class="zone-label" data-i18n="zone1">У окна</span>
         <div class="zone-tables">
-          <div class="table-dot" data-zone="У окна" data-cap="2">2</div>
-          <div class="table-dot" data-zone="У окна" data-cap="4">4</div>
+          <div class="table-dot" data-zone-ru="У окна" data-zone-en="By the window" data-cap="2">2</div>
+          <div class="table-dot" data-zone-ru="У окна" data-zone-en="By the window" data-cap="4">4</div>
         </div>
       </div>
       <div class="zone">
-        <span class="zone-label">Общий зал</span>
+        <span class="zone-label" data-i18n="zone2">Общий зал</span>
         <div class="zone-tables">
-          <div class="table-dot" data-zone="Общий зал" data-cap="2">2</div>
-          <div class="table-dot" data-zone="Общий зал" data-cap="6">6</div>
-          <div class="table-dot" data-zone="Общий зал" data-cap="4">4</div>
+          <div class="table-dot" data-zone-ru="Общий зал" data-zone-en="Main hall" data-cap="2">2</div>
+          <div class="table-dot" data-zone-ru="Общий зал" data-zone-en="Main hall" data-cap="6">6</div>
+          <div class="table-dot" data-zone-ru="Общий зал" data-zone-en="Main hall" data-cap="4">4</div>
         </div>
       </div>
       <div class="zone">
-        <span class="zone-label">Терраса</span>
+        <span class="zone-label" data-i18n="zone3">Терраса</span>
         <div class="zone-tables">
-          <div class="table-dot" data-zone="Терраса" data-cap="2">2</div>
-          <div class="table-dot" data-zone="Терраса" data-cap="4">4</div>
+          <div class="table-dot" data-zone-ru="Терраса" data-zone-en="Terrace" data-cap="2">2</div>
+          <div class="table-dot" data-zone-ru="Терраса" data-zone-en="Terrace" data-cap="4">4</div>
         </div>
       </div>
       <div class="zone">
-        <span class="zone-label">У бара</span>
+        <span class="zone-label" data-i18n="zone4">У бара</span>
         <div class="zone-tables">
-          <div class="table-dot" data-zone="У бара" data-cap="2">2</div>
-          <div class="table-dot" data-zone="У бара" data-cap="2">2</div>
+          <div class="table-dot" data-zone-ru="У бара" data-zone-en="By the bar" data-cap="2">2</div>
+          <div class="table-dot" data-zone-ru="У бара" data-zone-en="By the bar" data-cap="2">2</div>
         </div>
       </div>
       <div class="zone">
-        <span class="zone-label">Приватный кабинет</span>
+        <span class="zone-label" data-i18n="zone5">Приватный кабинет</span>
         <div class="zone-tables">
-          <div class="table-dot" data-zone="Приватный кабинет" data-cap="8">8</div>
+          <div class="table-dot" data-zone-ru="Приватный кабинет" data-zone-en="Private room" data-cap="8">8</div>
         </div>
       </div>
 
-      <div class="picker-summary" id="pickerSummary">Столик пока не выбран — можно указать пожелание в форме брони.</div>
+      <div class="picker-summary" id="pickerSummary" data-i18n="picker_empty">Столик пока не выбран — можно указать пожелание в форме брони.</div>
     </div>
   </div>
 </section>
@@ -281,34 +286,34 @@
   <div class="wrap">
     <div class="book-grid">
       <div class="reveal">
-        <div class="eyebrow">бронирование</div>
-        <h2 style="font-size:clamp(28px,3.6vw,36px);margin-bottom:16px;">Забронировать столик</h2>
-        <p style="color:var(--muted);margin-bottom:28px;">Подтвердим бронь по телефону в течение 20 минут.</p>
+        <div class="eyebrow" data-i18n="booking_eyebrow">бронирование</div>
+        <h2 style="font-size:clamp(28px,3.6vw,36px);margin-bottom:16px;" data-i18n="booking_title">Забронировать столик</h2>
+        <p style="color:var(--muted);margin-bottom:28px;" data-i18n="booking_lead">Подтвердим бронь по телефону в течение 20 минут.</p>
         <form id="bookForm">
           <div class="row2">
-            <div class="field"><label>Имя</label><input type="text" required placeholder="Как к вам обращаться"></div>
-            <div class="field"><label>Телефон</label><input type="tel" required placeholder="+7 ___ ___ __ __"></div>
+            <div class="field"><label data-i18n="f_name">Имя</label><input type="text" required data-i18n-placeholder="ph_name" placeholder="Как к вам обращаться"></div>
+            <div class="field"><label data-i18n="f_phone">Телефон</label><input type="tel" required placeholder="+7 ___ ___ __ __"></div>
           </div>
           <div class="row3">
-            <div class="field"><label>Дата</label><input type="date" required></div>
-            <div class="field"><label>Время</label><input type="time" required></div>
-            <div class="field"><label>Гостей</label>
+            <div class="field"><label data-i18n="f_date">Дата</label><input type="date" required></div>
+            <div class="field"><label data-i18n="f_time">Время</label><input type="time" required></div>
+            <div class="field"><label data-i18n="f_guests">Гостей</label>
               <select id="guestsSelect">
-                <option>2 гостя</option><option>3 гостя</option><option>4 гостя</option><option>5–8 гостей</option><option>Более 8</option>
+                <option data-i18n="g2">2 гостя</option><option data-i18n="g3">3 гостя</option><option data-i18n="g4">4 гостя</option><option data-i18n="g5">5–8 гостей</option><option data-i18n="g6">Более 8</option>
               </select>
             </div>
           </div>
-          <div class="field"><label>Выбранный столик</label><input type="text" id="tableField" placeholder="Не выбран — можно указать пожелание ниже" readonly></div>
-          <div class="field"><label>Комментарий (необязательно)</label><input type="text" placeholder="Особый повод, аллергии, пожелания"></div>
-          <button type="submit" class="btn btn-primary" style="margin-top:6px;">Отправить бронь</button>
-          <div class="success" id="successMsg">Бронь отправлена — мы свяжемся с вами для подтверждения.</div>
+          <div class="field"><label data-i18n="f_table">Выбранный столик</label><input type="text" id="tableField" data-i18n-placeholder="ph_table" placeholder="Не выбран — можно указать пожелание ниже" readonly></div>
+          <div class="field"><label data-i18n="f_comment">Комментарий (необязательно)</label><input type="text" data-i18n-placeholder="ph_comment" placeholder="Особый повод, аллергии, пожелания"></div>
+          <button type="submit" class="btn btn-primary" style="margin-top:6px;" data-i18n="f_submit">Отправить бронь</button>
+          <div class="success" id="successMsg" data-i18n="f_success">Бронь отправлена — мы свяжемся с вами для подтверждения.</div>
         </form>
       </div>
       <div class="reveal contact-list">
-        <div class="item"><b>Телефон</b><span>+7 (900) 987-65-43</span></div>
-        <div class="item"><b>Адрес</b><span>г. Хельсинки, набережная, 12</span></div>
-        <div class="item"><b>Часы работы</b><span>Ежедневно, 18:00 – 00:00</span></div>
-        <div class="item"><b>Дресс-код</b><span>Smart casual, столики у окна — по предварительной брони</span></div>
+        <div class="item"><b data-i18n="c_phone">Телефон</b><span>+7 (900) 987-65-43</span></div>
+        <div class="item"><b data-i18n="c_addr">Адрес</b><span data-i18n="c_addr_v">г. Хельсинки, набережная, 12</span></div>
+        <div class="item"><b data-i18n="c_hours">Часы работы</b><span data-i18n="c_hours_v">Ежедневно, 18:00 – 00:00</span></div>
+        <div class="item"><b data-i18n="c_dress">Дресс-код</b><span data-i18n="c_dress_v">Smart casual, столики у окна — по предварительной брони</span></div>
       </div>
     </div>
   </div>
@@ -316,16 +321,140 @@
 
 <footer>
   <div class="wrap foot-row">
-    <div>© 2026 «Янтарь». Все права защищены.</div>
+    <div data-i18n="foot_copy">© 2026 «Янтарь». Все права защищены.</div>
     <div class="foot-links">
-      <a href="#menu">Меню</a>
-      <a href="#tables">Столики</a>
-      <a href="#booking">Бронь</a>
+      <a href="#menu" data-i18n="nav_menu">Меню</a>
+      <a href="#tables" data-i18n="nav_tables">Столики</a>
+      <a href="#booking" data-i18n="nav_booking">Бронь</a>
     </div>
   </div>
 </footer>
 
 <script>
+  const I18N = {
+    ru: {
+      nav_about:"О нас", nav_menu:"Меню", nav_tables:"Столики", nav_booking:"Бронь", nav_cta:"Забронировать",
+      hero_eyebrow:"ресторан авторской кухни",
+      hero_title:'Вечер, ради которого<br><em>стоит одеться</em>',
+      hero_lead:"Свечи, выдержанное вино и меню, которое меняется вместе с сезоном. Столик ждёт — осталось выбрать место в зале.",
+      hero_cta1:"Забронировать столик", hero_cta2:"Посмотреть меню",
+      meta1:"ежедневно", meta2:"рейтинг гостей", meta3:"столика в зале",
+      frame_tag1:"зал, вечер", frame_tag2:"свободно 6 мест",
+      phil_eyebrow:"философия", phil_title:"Три вещи, на которых всё держится",
+      phil1_h:"Кухня", phil1_p:"Сезонные продукты от локальных фермеров, минимум заморозки, авторская подача каждого блюда.",
+      phil2_h:"Винная карта", phil2_p:"120 позиций от небольших виноделен, сомелье поможет подобрать пару к каждому блюду.",
+      phil3_h:"Атмосфера", phil3_p:"Приглушённый свет, живой контрабас по пятницам и столики, за которыми не хочется спешить.",
+      menu_eyebrow:"меню", menu_title:"Несколько блюд, которыми гордимся",
+      menu_lead:"Полное меню — в зале и в приложении для гостей, здесь — то, с чего стоит начать.",
+      d1_h:"Тартар из говядины", d1_p:"Мраморная говядина, каперсы, желток на 63°, гренки на бородинском.",
+      d2_h:"Гребешок на углях", d2_p:"Морской гребешок, соус beurre blanc, цветная капуста, икра трески.",
+      d3_h:"Утка конфи", d3_p:"Утиная ножка 12 часов томления, пюре из сельдерея, вишнёвый джус.",
+      d4_h:"Паста с трюфелем", d4_p:"Тальятелле ручной работы, чёрный трюфель, пармезан 24 месяца.",
+      d5_h:"Баранья корейка", d5_p:"Корейка на кости, соус демиглас, печёный батат, розмарин.",
+      d6_h:"Шоколадный фондан", d6_p:"Тёплый шоколад с жидкой сердцевиной, мороженое из мадагаскарской ванили.",
+      tables_eyebrow:"зал", tables_title:"Выберите место в зале",
+      tables_lead:"Нажмите на свободный столик — выбор автоматически подставится в форму брони.",
+      zone1:"У окна", zone2:"Общий зал", zone3:"Терраса", zone4:"У бара", zone5:"Приватный кабинет",
+      picker_empty:"Столик пока не выбран — можно указать пожелание в форме брони.",
+      picker_selected_prefix:"Выбран столик: ", picker_cap_suffix:" чел.",
+      table_field_value_sep:", столик на ",
+      booking_eyebrow:"бронирование", booking_title:"Забронировать столик", booking_lead:"Подтвердим бронь по телефону в течение 20 минут.",
+      f_name:"Имя", ph_name:"Как к вам обращаться", f_phone:"Телефон",
+      f_date:"Дата", f_time:"Время", f_guests:"Гостей",
+      g2:"2 гостя", g3:"3 гостя", g4:"4 гостя", g5:"5–8 гостей", g6:"Более 8",
+      f_table:"Выбранный столик", ph_table:"Не выбран — можно указать пожелание ниже",
+      f_comment:"Комментарий (необязательно)", ph_comment:"Особый повод, аллергии, пожелания",
+      f_submit:"Отправить бронь", f_success:"Бронь отправлена — мы свяжемся с вами для подтверждения.",
+      c_phone:"Телефон", c_addr:"Адрес", c_addr_v:"г. Хельсинки, набережная, 12",
+      c_hours:"Часы работы", c_hours_v:"Ежедневно, 18:00 – 00:00",
+      c_dress:"Дресс-код", c_dress_v:"Smart casual, столики у окна — по предварительной брони",
+      foot_copy:"© 2026 «Янтарь». Все права защищены."
+    },
+    en: {
+      nav_about:"About", nav_menu:"Menu", nav_tables:"Tables", nav_booking:"Reservation", nav_cta:"Reserve a table",
+      hero_eyebrow:"restaurant with a seasonal menu",
+      hero_title:'An evening worth<br><em>dressing up for</em>',
+      hero_lead:"Candlelight, aged wine and a menu that changes with the season. Your table is waiting — just pick your spot in the hall.",
+      hero_cta1:"Reserve a table", hero_cta2:"View the menu",
+      meta1:"daily", meta2:"guest rating", meta3:"tables in the hall",
+      frame_tag1:"hall, evening", frame_tag2:"6 seats available",
+      phil_eyebrow:"philosophy", phil_title:"Three things everything is built on",
+      phil1_h:"Kitchen", phil1_p:"Seasonal produce from local farms, minimal freezing, chef's plating on every dish.",
+      phil2_h:"Wine list", phil2_p:"120 labels from small wineries — our sommelier will pair one with every course.",
+      phil3_h:"Atmosphere", phil3_p:"Low light, live double bass on Fridays, and tables you won't want to rush away from.",
+      menu_eyebrow:"menu", menu_title:"A few dishes we're proud of",
+      menu_lead:"The full menu is in the hall and in the guest app — here's where to start.",
+      d1_h:"Beef tartare", d1_p:"Marbled beef, capers, 63° egg yolk, croutons on rye bread.",
+      d2_h:"Grilled scallop", d2_p:"Sea scallop, beurre blanc, cauliflower, cod roe.",
+      d3_h:"Duck confit", d3_p:"Duck leg braised 12 hours, celery root purée, cherry jus.",
+      d4_h:"Truffle pasta", d4_p:"Hand-made tagliatelle, black truffle, 24-month parmesan.",
+      d5_h:"Lamb rack", d5_p:"Bone-in rack, demi-glace, roasted sweet potato, rosemary.",
+      d6_h:"Chocolate fondant", d6_p:"Warm chocolate with a molten center, Madagascar vanilla ice cream.",
+      tables_eyebrow:"the hall", tables_title:"Choose your spot in the hall",
+      tables_lead:"Click a free table — it will be added to the reservation form automatically.",
+      zone1:"By the window", zone2:"Main hall", zone3:"Terrace", zone4:"By the bar", zone5:"Private room",
+      picker_empty:"No table selected yet — you can note a preference in the form below.",
+      picker_selected_prefix:"Table selected: ", picker_cap_suffix:" guests",
+      table_field_value_sep:", table for ",
+      booking_eyebrow:"reservation", booking_title:"Reserve a table", booking_lead:"We'll confirm the reservation by phone within 20 minutes.",
+      f_name:"Name", ph_name:"How should we address you", f_phone:"Phone",
+      f_date:"Date", f_time:"Time", f_guests:"Guests",
+      g2:"2 guests", g3:"3 guests", g4:"4 guests", g5:"5–8 guests", g6:"More than 8",
+      f_table:"Selected table", ph_table:"Not selected — you can note a preference below",
+      f_comment:"Comment (optional)", ph_comment:"Special occasion, allergies, requests",
+      f_submit:"Send reservation", f_success:"Reservation sent — we'll be in touch to confirm.",
+      c_phone:"Phone", c_addr:"Address", c_addr_v:"Helsinki, waterfront, 12",
+      c_hours:"Hours", c_hours_v:"Daily, 18:00 – 00:00",
+      c_dress:"Dress code", c_dress_v:"Smart casual, window tables by reservation only",
+      foot_copy:"© 2026 \"Yantar\". All rights reserved."
+    }
+  };
+
+  let LANG = new URLSearchParams(location.search).get('lang') || localStorage.getItem('lang') || 'ru';
+  if(LANG !== 'ru' && LANG !== 'en') LANG = 'ru';
+  localStorage.setItem('lang', LANG);
+
+  const summary = document.getElementById('pickerSummary');
+  const tableField = document.getElementById('tableField');
+  let selectedDot = null;
+
+  function updateSelectionText(){
+    const dict = I18N[LANG];
+    if(!selectedDot){
+      summary.textContent = dict.picker_empty;
+      return;
+    }
+    const zone = selectedDot.dataset[LANG === 'ru' ? 'zoneRu' : 'zoneEn'];
+    const cap = selectedDot.dataset.cap;
+    summary.innerHTML = `${dict.picker_selected_prefix}<b>${zone}, ${cap}${dict.picker_cap_suffix}</b>`;
+    tableField.value = `${zone}${dict.table_field_value_sep}${cap}${LANG==='ru' ? ' чел.' : ' guests'}`;
+  }
+
+  function applyLang(){
+    const dict = I18N[LANG];
+    document.documentElement.lang = LANG;
+    document.querySelectorAll('[data-i18n]').forEach(el=>{
+      const k = el.dataset.i18n;
+      if(dict[k] !== undefined) el.textContent = dict[k];
+    });
+    document.querySelectorAll('[data-i18n-html]').forEach(el=>{
+      const k = el.dataset.i18nHtml;
+      if(dict[k] !== undefined) el.innerHTML = dict[k];
+    });
+    document.querySelectorAll('[data-i18n-placeholder]').forEach(el=>{
+      const k = el.dataset.i18nPlaceholder;
+      if(dict[k] !== undefined) el.placeholder = dict[k];
+    });
+    document.getElementById('langSwitch').textContent = LANG === 'ru' ? 'RU / EN' : 'EN / RU';
+    updateSelectionText();
+  }
+
+  document.getElementById('langSwitch').addEventListener('click', ()=>{
+    LANG = LANG === 'ru' ? 'en' : 'ru';
+    localStorage.setItem('lang', LANG);
+    applyLang();
+  });
+
   const burger = document.getElementById('burger');
   const navLinks = document.getElementById('navLinks');
   burger.addEventListener('click', ()=> navLinks.classList.toggle('open'));
@@ -337,15 +466,12 @@
   document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
 
   const dots = document.querySelectorAll('.table-dot');
-  const summary = document.getElementById('pickerSummary');
-  const tableField = document.getElementById('tableField');
   dots.forEach(dot=>{
     dot.addEventListener('click', ()=>{
       dots.forEach(d=>d.classList.remove('selected'));
       dot.classList.add('selected');
-      const zone = dot.dataset.zone, cap = dot.dataset.cap;
-      summary.innerHTML = `Выбран столик: <b>${zone}, на ${cap} чел.</b>`;
-      tableField.value = `${zone}, столик на ${cap} чел.`;
+      selectedDot = dot;
+      updateSelectionText();
     });
   });
 
@@ -354,7 +480,12 @@
     document.getElementById('successMsg').classList.add('show');
     this.reset();
     document.getElementById('tableField').value = '';
+    selectedDot = null;
+    dots.forEach(d=>d.classList.remove('selected'));
+    updateSelectionText();
   });
+
+  applyLang();
 </script>
 </body>
 </html>
